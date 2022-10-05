@@ -20,15 +20,15 @@
         return $data;
     }
 
-    function replaceSpaces($string) {
-        $newString = preg_replace('/\s+/', '_', $string);
-        return $newString;
-    }
+    // function replaceSpaces($string) {
+    //     $newString = preg_replace('/\s+/', '_', $string);
+    //     return $newString;
+    // }
 
-    function replaceUnderScores($string){
-        $newString = preg_replace("/_+/"," ", $string);
-        return $newString;
-    }
+    // function replaceUnderScores($string){
+    //     $newString = preg_replace("/_+/"," ", $string);
+    //     return $newString;
+    // }
     
 
     //Returns an array containing any error messages, an array containing sanitized user data
@@ -114,7 +114,7 @@
 
     //Writes the new complete data obj to the data.json file (replacing what was there before..)
     function writeData($data) {
-        $data = json_encode($data);
+        $data = json_encode($data, JSON_PRETTY_PRINT);
         file_put_contents(FILEPATH , $data);
     }
 
@@ -158,6 +158,36 @@
         echo '<br>';
         return $results;
     }
+
+    //Take the PHP data object and a restaurant name represneting an entry to be deleted.
+    //Returns the PHP Object with the target entry deleted...
+    function deleteAnEntry($data, $entryToDelete) {
+        $newData = [];
+        for($i=0; $i<count($data); $i++) {
+            echo 'ENTRY' . $i . '<br>';
+            $delete = false;
+            foreach($data[$i] as $key => $val) {
+                echo $key . ' ';
+                echo $val . ' ' . '<br>';
+                if($key === 'name' && $val === $entryToDelete) {
+                    echo "Delete THIS Value" . "<br>";
+                    print_r($data[$i]);
+                    echo "<br>";
+                    $delete = true;
+                    break;
+                }
+            }
+            if(!$delete) {
+                echo 'ADD TO THE ARRAY HERE!';
+                array_push($newData, $data[$i]);
+            } 
+        }
+        echo "<br>";
+        echo "<br>";
+        print_r($newData);
+        return $newData;
+    }
+       
 
     function updateData($objToUpdate, $data) {
         for($i=0; $i<count($objToUpdate); $i++) {

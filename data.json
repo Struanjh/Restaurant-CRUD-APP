@@ -1,1 +1,18 @@
-[{"name":"BK","city":"Aber","district":"Aberdeenshire","postcode":"AB","cuisine":"vietnamese","price":"low_price"},{"name":"Fried Chicken Place","city":"Busan","district":"Gwangali","postcode":"1234","cuisine":"korean","price":"high_price"},{"name":"New Place","city":"Daegu","district":"D!","postcode":"DSDD","cuisine":"japanese","price":"high_price"},{"name":"hihi","city":"hello","district":"sss","postcode":"sss","cuisine":"korean","price":"medium_price"}]
+[
+    {
+        "name": "Hello",
+        "city": "Busan",
+        "district": "Busan",
+        "postcode": "B1",
+        "cuisine": "korean",
+        "price": "high_price"
+    },
+    {
+        "name": "Bibimbap",
+        "city": "Seoul",
+        "district": "Gu",
+        "postcode": "G1",
+        "cuisine": "korean",
+        "price": "high_price"
+    }
+]

@@ -6,9 +6,21 @@
     $restaurantNames = listRestaurantNames($json_data);
 
     if(isset($_POST['edit'])) {
-        echo($_POST['restaurant_name']);
         $currSelecData = filterData($json_data, ['name' => $_POST['restaurant_name']]);
         print_r($currSelecData);
+    }
+
+    if(isset($_POST['delete'])) {
+        $updatedData = deleteAnEntry($json_data, $_POST['restaurant_name']);
+        writeData($updatedData);
+        $restaurantNames = listRestaurantNames($json_data);
+        // echo "HERE IS THE UPDATED DATA" . '<br>' . '<br>';
+        // print_r($updatedData);
+        // echo '<br>' . '<br>';
+        // $data = [];
+        // array_push($data, $updatedData);
+        // writeData($data);
+        // $restaurantNames = listRestaurantNames($json_data);
     }
 
 
