@@ -1,0 +1,36 @@
+TO DO:
+1) Create form with following buttons....
+-- Add a new location....
+-- Update an existing location...
+-- Search for an existing location....
+-- Delete an existing location...
+
+2) Create following pages with basic html layout boilerplate....
+-- Add Location (form) page
+-- View and search existing location
+
+
+
+[
+    {
+        "name": "xxxx",
+        "location": {
+            "city": "xxx",
+            "district": "xxxx",
+            "postcode": "xxxx"
+        },
+        "cuisine": "xxx",
+        "price-range": "xxxx",
+        "picture": "",
+        "visits":
+            [
+                {
+                    "date": "xxxx",
+                    "dishes ordered": [xx,xx,xx],
+                    "cost": "",
+                    "rating out of 10": "",
+                    "comments": " "
+                }
+            ]
+    }
+]
