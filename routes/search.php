@@ -2,14 +2,16 @@
     include "../_functions.php";
     include "../includes/_constants.php";
 
-    if(isset($_POST['submit'])) {
+    $dataFile = file_exists(FILEPATH);
+
+    if(isset($_POST['submit']) && $dataFile) {
         $json_data = readData();
         $restaurantNames = listRestaurantNames($json_data);
         if(count($restaurantNames) === 0) {
             $outcomeMsg = "There are no restaurants to search!";
         } else {
             //Indexed Arr
-            $formSubmission = handleFormSubmission("SEARCH");
+            $formSubmission = handleFormSubmission("SEARCH", false);
             // //Assoc Arr
             $submittedData = $formSubmission[1];
             $searchResults = filterData($json_data, $submittedData);
@@ -20,5 +22,7 @@
                 $outcomeMsg = countSearchResults(count($searchResults));
             } 
         }
+    } else {
+        $outcomeMsg = "There are no restaurants to search!";
     }
    

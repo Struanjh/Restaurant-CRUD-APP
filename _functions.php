@@ -22,16 +22,17 @@
     
     //Returns an array containing any error messages, an array containing sanitized user data
     //+ a boolean showing if validation passed..
-    function handleFormSubmission($operation) {
+    function handleFormSubmission($operation, $newFile) {
         $errorMessages = [];
         $submittedData = [];
         $validationPassed = true;
+        // $emptyFile = isset($GLOBALS['restaurantNames']);
         if (empty($_POST["restaurant_name"]) && $operation !== "SEARCH") {
             $nameErr = "Name is required";
             $errorMessages["nameErr"] = $nameErr;
             $submittedData["name"] = "";
             $validationPassed = false;
-        } elseif (in_array($_POST["restaurant_name"], $GLOBALS['restaurantNames']) && $operation === "ADD") {
+        } elseif (!$newFile && in_array($_POST["restaurant_name"], $GLOBALS['restaurantNames']) && $operation === "ADD") {
             $nameErr = "This name already exists!";
             $errorMessages["nameErr"] = $nameErr;
             $submittedData["name"] = "";
