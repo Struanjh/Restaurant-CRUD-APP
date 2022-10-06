@@ -28,7 +28,7 @@
         writeData($newData);
         $successMsg = "Record Added Successfully!";
     } else {
-        $successMsg = "";
+        $successMsg = "Fix the errors and try again!";
     }
  
 

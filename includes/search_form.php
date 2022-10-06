@@ -40,7 +40,7 @@
 </form>
 <h4 id="success_message"><?php if(isset($_POST['submit'])) echo $outcomeMsg; ?></h4>
     <?php
-    if(isset($_POST['submit'])) {
+    if(isset($_POST['submit']) && count($restaurantNames) > 0) {
         for($i=0; $i<count($searchResults); $i++) { 
     ?>
             <div>

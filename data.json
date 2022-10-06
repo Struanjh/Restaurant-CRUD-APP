@@ -1,18 +1,10 @@
 [
     {
-        "name": "Hello",
-        "city": "Busan",
-        "district": "Busan",
-        "postcode": "B1",
+        "name": "adsads",
+        "city": "ads",
+        "district": "asd",
+        "postcode": "dsa",
         "cuisine": "korean",
-        "price": "high_price"
-    },
-    {
-        "name": "Bibimbap",
-        "city": "Seoul",
-        "district": "Gu",
-        "postcode": "G1",
-        "cuisine": "korean",
-        "price": "high_price"
+        "price": "medium_price"
     }
 ]

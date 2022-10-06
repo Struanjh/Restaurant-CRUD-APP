@@ -19,18 +19,7 @@
         $data = htmlspecialchars($data);
         return $data;
     }
-
-    // function replaceSpaces($string) {
-    //     $newString = preg_replace('/\s+/', '_', $string);
-    //     return $newString;
-    // }
-
-    // function replaceUnderScores($string){
-    //     $newString = preg_replace("/_+/"," ", $string);
-    //     return $newString;
-    // }
     
-
     //Returns an array containing any error messages, an array containing sanitized user data
     //+ a boolean showing if validation passed..
     function handleFormSubmission($operation) {
@@ -96,6 +85,14 @@
             $errorMessages["priceErr"] = "";
             $submittedData["price"] = cleanse_data($_POST["price"]);
         }
+        if($operation === "SEARCH") {
+            //The user may not have completed all fields so remove empty array keys to prevent errors
+            foreach($submittedData as $key => $val) {
+                if (empty($submittedData[$key])) {
+                    unset($submittedData[$key]);
+                }
+            }
+        }
         return [$errorMessages, $submittedData, $validationPassed];
     }
 
@@ -137,10 +134,8 @@
     function filterData($objToFilter, $criteria) {
         $results = [];
         for ($i = 0; $i < count($objToFilter); $i++) {
-            echo print_r($objToFilter[$i]) . '<br>';
             $matchFound = true;
             foreach($criteria as $key => $value) {
-                echo $key . '  ' . $value . '<br>';
                 if(isset($objToFilter[$i][$key]) && $objToFilter[$i][$key] == $value) {
                     continue;
                 } else {
@@ -152,10 +147,6 @@
                 array_push($results, $objToFilter[$i]);
             }
         }
-        echo "FUNCTION VAL";
-        echo '<br>';
-        print_r($results);
-        echo '<br>';
         return $results;
     }
 
@@ -164,15 +155,9 @@
     function deleteAnEntry($data, $entryToDelete) {
         $newData = [];
         for($i=0; $i<count($data); $i++) {
-            echo 'ENTRY' . $i . '<br>';
             $delete = false;
             foreach($data[$i] as $key => $val) {
-                echo $key . ' ';
-                echo $val . ' ' . '<br>';
                 if($key === 'name' && $val === $entryToDelete) {
-                    echo "Delete THIS Value" . "<br>";
-                    print_r($data[$i]);
-                    echo "<br>";
                     $delete = true;
                     break;
                 }
@@ -182,9 +167,6 @@
                 array_push($newData, $data[$i]);
             } 
         }
-        echo "<br>";
-        echo "<br>";
-        print_r($newData);
         return $newData;
     }
        

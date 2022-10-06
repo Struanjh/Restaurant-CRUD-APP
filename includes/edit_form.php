@@ -59,6 +59,6 @@
     </fieldset>
     <button type="submit" name="submit" value="submit">Submit</button> 
 </form>
-<h4 id="success_message"><?php if(isset($_POST['submit'])) echo $successMsg; ?></h4> 
+<h4 id="success_message"><?php if(!empty($successMsg))echo $successMsg; ?></h4> 
        
   

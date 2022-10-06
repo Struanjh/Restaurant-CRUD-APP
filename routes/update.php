@@ -6,21 +6,23 @@
     $restaurantNames = listRestaurantNames($json_data);
 
     if(isset($_POST['edit'])) {
-        $currSelecData = filterData($json_data, ['name' => $_POST['restaurant_name']]);
-        print_r($currSelecData);
+        if(count($restaurantNames) === 0) {
+            $successMsg = "There are no restaurants available to edit!";
+        } else {
+            $currSelecData = filterData($json_data, ['name' => $_POST['restaurant_name']]);
+        }
     }
 
     if(isset($_POST['delete'])) {
-        $updatedData = deleteAnEntry($json_data, $_POST['restaurant_name']);
-        writeData($updatedData);
-        $restaurantNames = listRestaurantNames($json_data);
-        // echo "HERE IS THE UPDATED DATA" . '<br>' . '<br>';
-        // print_r($updatedData);
-        // echo '<br>' . '<br>';
-        // $data = [];
-        // array_push($data, $updatedData);
-        // writeData($data);
-        // $restaurantNames = listRestaurantNames($json_data);
+        if(count($restaurantNames) === 0) {
+            $successMsg = "There are no restaurants available to delete!";
+        } else {
+            $updatedData = deleteAnEntry($json_data, $_POST['restaurant_name']);
+            writeData($updatedData);
+            //Re-read the data and re-list restaurant names to show updated dropdown list for the user....
+            $json_data = readData();
+            $restaurantNames = listRestaurantNames($json_data);
+        }
     }
 
 
@@ -32,12 +34,6 @@
         //Assoc Arr
         $submittedData = $formSubmission[1];
         //Boolean
-        echo "SUBMITTED DATA!" . "<br>";
-        print_r($submittedData);
-        echo '<br>';
-        echo "FORM VALIDATION DATA!" . "<br>";
-        print_r($formValidation);
-        echo '<br>';
         $validationPassed = $formSubmission[2];
         if($validationPassed) {
             //Assoc Area
@@ -45,7 +41,7 @@
             writeData($updatedData);
             $successMsg = "Record Updated Successfully!";
         } else {
-            $successMsg = "Please fix the errors and try again!";
+            $successMsg = "Fix the errors and try again!";
         }
     }
    
