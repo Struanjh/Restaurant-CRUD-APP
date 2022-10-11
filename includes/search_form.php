@@ -9,40 +9,61 @@
 <body>
     <?php   include "../routes/search.php"; ?>
     <form method="post">
-        <label for="restaurant_name">Restaurant Name</label>
-        <input type="text" name="restaurant_name" id="restaurant_name" value="<?php if($_SERVER["REQUEST_METHOD"] == "POST" && isset($submittedData['name'])) echo $submittedData['name']; ?>">
-        <fieldset>
+        <div class="form-section">
+            <div class="form-sub-section">
+                <label for="restaurant_name">Restaurant Name</label>
+                <input type="text" name="restaurant_name" id="restaurant_name" value="<?php if($_SERVER["REQUEST_METHOD"] == "POST" && isset($submittedData['name'])) echo $submittedData['name']; ?>">
+            </div>
+            <div class="form-sub-section">
+                <label for="cuisine">Cuisine</label>
+                <select name="cuisine" id="cuisine">
+                    <?php
+                        $cuisineArr = ["korean", "japanese", "thai", "vietnamese", "american"];
+                        for ($i=0; $i<count($cuisineArr); $i++) {
+                            if(isset($_POST['submit']) && $submittedData['cuisine'] == $cuisineArr[$i]) {
+                                $selected = 'selected';
+                            } else {
+                                $selected = '';
+                            }
+                    ?>
+                        <option value=<?=$cuisineArr[$i]?> <?=$selected?>> <?=$cuisineArr[$i]?> </option>
+                    <?php 
+                        } 
+                    ?> 
+                </select>
+            </div>
+            <div class="form-sub-section">
+                <fieldset>
+                    <legend>Price</legend>
+                    <div>
+                        <label for="low_price">Budget</label>
+                        <input type="radio" name="price" id="low_price" value="low_price">
+                    </div>
+                    <div>
+                        <label for="medium_price">Normal</label>
+                        <input type="radio" name="price" id="medium_price" value="medium_price">
+                    </div>
+                    <div>
+                        <label for="high_price">Expensive</label>
+                        <input type="radio" name="price" id="high_price" value="high_price">
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <fieldset class="form-section">
             <legend>Location Info</legend>
-            <label for="city">City</label>
-            <input type="text" id="city" name="city" value="<?php if($_SERVER["REQUEST_METHOD"] == "POST" && isset($submittedData['city'])) echo $submittedData['city']; ?>">
-            <label for="district">District</label>
-            <input type="text" id="district" name="district" value="<?php if($_SERVER["REQUEST_METHOD"] == "POST" && isset($submittedData['district'])) echo $submittedData['district']; ?>">
-            <label for="postcode">Postcode</label>
-            <input type="text" id="postcode" name="postcode" <?php if($_SERVER["REQUEST_METHOD"] == "POST" && isset($submittedData['postcode'])) echo $submittedData['postcode']; ?>>
-        </fieldset>
-        <label for="cuisine">Cuisine</label>
-        <select name="cuisine" id="cuisine">
-            <?php
-                $cuisineArr = ["korean", "japanese", "thai", "vietnamese", "american"];
-                for ($i=0; $i<count($cuisineArr); $i++) {
-                    if(isset($_POST['submit']) && $submittedData['cuisine'] == $cuisineArr[$i]) {
-                        $selected = 'selected';
-                    } else {
-                        $selected = '';
-                    }
-            ?>
-                <option value=<?=$cuisineArr[$i]?> <?=$selected?>> <?=$cuisineArr[$i]?> </option>
-            <?php 
-                } 
-            ?> 
-        </select>
-        <fieldset>
-            <label for="low_price">Budget</label>
-            <input type="radio" name="price" id="low_price" value="low_price">
-            <label for="medium_price">Normal</label>
-            <input type="radio" name="price" id="medium_price" value="medium_price">
-            <label for="high_price">Expensive</label>
-            <input type="radio" name="price" id="high_price" value="high_price">
+            <div class="form-sub-section">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" value="<?php if($_SERVER["REQUEST_METHOD"] == "POST" && isset($submittedData['city'])) echo $submittedData['city']; ?>">
+            </div>
+            <div class="form-sub-section">
+                <label for="district">District</label>
+                <input type="text" id="district" name="district" value="<?php if($_SERVER["REQUEST_METHOD"] == "POST" && isset($submittedData['district'])) echo $submittedData['district']; ?>">
+            </div>
+            <div class="form-sub-section">
+                <label for="postcode">Postcode</label>
+                <input type="text" id="postcode" name="postcode" <?php if($_SERVER["REQUEST_METHOD"] == "POST" && isset($submittedData['postcode'])) echo $submittedData['postcode']; ?>>
+            </div>
         </fieldset>
         <button type="submit" name="submit" value="submit">Submit</button>
     </form>

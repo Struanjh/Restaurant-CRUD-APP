@@ -1,2 +1,2 @@
 <?php
-define('FILEPATH', '/Applications/XAMPP/xamppfiles/htdocs/RESTAURANT_APP/data.json');
+define('FILEPATH', __DIR__ . '/../data.json');

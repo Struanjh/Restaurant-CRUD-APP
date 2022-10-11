@@ -1,10 +1,26 @@
 [
     {
-        "name": "bye345",
-        "city": "dffsd",
-        "district": "dsf",
-        "postcode": "sdf",
+        "name": "Hello123",
+        "city": "sd",
+        "district": "sad",
+        "postcode": "asd",
         "cuisine": "korean",
-        "price": "high_price"
+        "price": "medium_price"
+    },
+    {
+        "name": "hello123",
+        "city": "cdsds",
+        "district": "dsfsdf",
+        "postcode": "dsfsdf",
+        "cuisine": "korean",
+        "price": "low_price"
+    },
+    {
+        "name": "dffds",
+        "city": "sdf",
+        "district": "sdf",
+        "postcode": "sddfs",
+        "cuisine": "korean",
+        "price": "medium_price"
     }
 ]

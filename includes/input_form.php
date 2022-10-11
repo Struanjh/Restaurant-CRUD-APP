@@ -38,22 +38,24 @@
                 </select>
                 <span class="error"><?php if($_SERVER["REQUEST_METHOD"] == "POST") echo $formValidation['cuisineErr']; ?></span>
             </div>
-            <fieldset class="form-sub-section">
-                <legend>Price</legend>
-                <div>
-                    <label for="low_price">Budget</label>
-                    <input type="radio" name="price" id="low_price" value="low_price">
-                </div>
-                <div>
-                    <label for="medium_price">Normal</label>
-                    <input type="radio" name="price" id="medium_price" value="medium_price">
-                </div>
-                <div>
-                    <label for="high_price">Expensive</label>
-                    <input type="radio" name="price" id="high_price" value="high_price">
-                </div>
+            <div class="form-sub-section">
+                <fieldset>
+                    <legend>Price</legend>
+                    <div>
+                        <label for="low_price">Budget</label>
+                        <input type="radio" name="price" id="low_price" value="low_price" <?php if($_SERVER["REQUEST_METHOD"] == "POST" && !$validationPassed && $submittedData['price'] === 'low_price') echo 'checked'; ?>>
+                    </div>
+                    <div>
+                        <label for="medium_price">Normal</label>
+                        <input type="radio" name="price" id="medium_price" value="medium_price" <?php if($_SERVER["REQUEST_METHOD"] == "POST" && !$validationPassed && $submittedData['price'] === 'medium_price') echo 'checked';?>>
+                    </div>
+                    <div>
+                        <label for="high_price">Expensive</label>
+                        <input type="radio" name="price" id="high_price" value="high_price" <?php if($_SERVER["REQUEST_METHOD"] == "POST" && !$validationPassed && $submittedData['price'] === 'high_price') echo 'checked';?>>
+                    </div>
+                </fieldset>
                 <span class="error"><?php if($_SERVER["REQUEST_METHOD"] == "POST") echo $formValidation['priceErr']; ?></span>
-            </fieldset>
+            </div>
         </div>
         <fieldset class="form-section">
             <legend>Location Info</legend>
@@ -69,7 +71,7 @@
             </div>
             <div class="form-sub-section">
                 <label for="postcode">Postcode</label>
-                <input type="text" id="postcode" name="postcode" <?php if($_SERVER["REQUEST_METHOD"] == "POST"&& !$validationPassed) echo $submittedData['postcode']; ?>>
+                <input type="text" id="postcode" name="postcode" value="<?php if($_SERVER["REQUEST_METHOD"] == "POST"&& !$validationPassed) echo $submittedData['postcode']; ?>">
                 <span class="error"><?php if($_SERVER["REQUEST_METHOD"] == "POST") echo $formValidation['postcodeErr']; ?></span>
             </div>
         </fieldset>
