@@ -1,10 +1,10 @@
 [
     {
-        "name": "hello123",
-        "city": "Busad",
-        "district": "asd",
-        "postcode": "sdfa",
+        "name": "bye345",
+        "city": "dffsd",
+        "district": "dsf",
+        "postcode": "sdf",
         "cuisine": "korean",
-        "price": "medium_price"
+        "price": "high_price"
     }
 ]
