@@ -39,7 +39,7 @@
                 <span class="error"><?php if($_SERVER["REQUEST_METHOD"] == "POST") echo $formValidation['cuisineErr']; ?></span>
             </div>
             <div class="form-sub-section">
-                <fieldset>
+                <fieldset class="price">
                     <legend>Price</legend>
                     <div>
                         <label for="low_price">Budget</label>

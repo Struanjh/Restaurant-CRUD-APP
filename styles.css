@@ -12,7 +12,7 @@ nav {
     align-items: center;
     justify-content: center;
     height: 5vh;
-    margin-bottom: 10vh;
+    margin-bottom: 5vh;
 }
 
 nav li {
@@ -24,7 +24,7 @@ nav li {
 }
 
 form {
-    width: 60vw;
+    width: 50vw;
     height: 60vh;
     margin: 0 auto;
     display: flex;
@@ -33,9 +33,10 @@ form {
     justify-content: space-between;
 }
 
-form, .edit {
+form.edit {
     height: 70vh;
 }
+
 
 .form-section {
     display: flex;
@@ -55,9 +56,16 @@ form, .edit {
     height: 100%;
 }
 
+.form-sub-section {
+    padding: 5px;
+}
 
-.form-sub-section * {
-    padding: 10px;
+fieldset.price {
+    height: 70%;
+}
+
+fieldset.price > div {
+    padding: 5px;
 }
 
 nav li a {
@@ -85,10 +93,19 @@ button {
 .error {
     color: red;
     font-weight: 800;
+    height: 30%;
+    font-size: 0.8em;
+    margin-top: 2px;
 }
 
 #success_message {
     color: red;
     font-weight: 800;
     text-align: center;
+}
+
+div.resultsContainer {
+    width: 80%;
+    display: grid;
+    grid-template-columns: auto;
 }

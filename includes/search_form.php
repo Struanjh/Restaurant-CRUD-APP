@@ -1,3 +1,5 @@
+<!-- TO DO - GIVE FIXED HEIGHT TO EVERY ERROR SPAN TO PREVENT THINGS MOVING WHEN ERROR MESSAGES SHOW!!!! -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +35,7 @@
                 </select>
             </div>
             <div class="form-sub-section">
-                <fieldset>
+                <fieldset class="price">
                     <legend>Price</legend>
                     <div>
                         <label for="low_price">Budget</label>
@@ -70,9 +72,11 @@
     <h4 id="success_message"><?php if(isset($_POST['submit'])) echo $outcomeMsg; ?></h4>
         <?php
         if(isset($_POST['submit']) && $dataFile && count($restaurantNames) > 0 ) {
+            echo "<div class='resultsContainer'>";
             for($i=0; $i<count($searchResults); $i++) { 
         ?>
-                <div>
+                <div class="result">
+                    <img src=<?php echo makeRequest('https://countryflagsapi.com/png/', 'kr')?>>
                     <h4><?= $searchResults[$i]['name'] ?></h4>
                     <ul>
                         <li><?= $searchResults[$i]['city'] ?></li>
@@ -83,9 +87,11 @@
                     </ul>
                 </div>
         <?php 
-            } 
+            }
+            echo "</div>";
         }
         ?> 
+        
 </body>
 </html>
 

@@ -57,7 +57,7 @@
                     <span class="error"><?php if(isset($_POST['submit']) && count($restaurantNames) > 0) echo $formValidation['cuisineErr']; ?></span>
                 </div>
                 <div class="form-sub-section">
-                    <fieldset>
+                    <fieldset class="price">
                         <legend>Price Range</legend>
                         <div>
                             <label for="low_price">Budget</label>
@@ -71,8 +71,8 @@
                             <label for="high_price">Expensive</label>
                             <input type="radio" name="price" id="high_price" value="high_price" <?php if(isset($_POST['edit'], $currSelecData[0]['price']) && $currSelecData[0]['price'] == 'high_price') echo 'checked';?>>
                         </div>
-                        <span class="error"><?php if(isset($_POST['submit']) && count($restaurantNames) > 0) echo $formValidation['priceErr']; ?></span>
                     </fieldset>
+                    <span class="error"><?php if(isset($_POST['submit']) && count($restaurantNames) > 0) echo $formValidation['priceErr']; ?></span>
                 </div>
             </div>
             <fieldset class="form-section">

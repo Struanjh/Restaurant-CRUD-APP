@@ -29,8 +29,9 @@
             //Re-read the data and re-list restaurant names to show updated dropdown list for the user....
             $json_data = readData();
             $restaurantNames = listRestaurantNames($json_data);
+            $successMsg = "Record Deleted Successfully!";
         }
-    }
+    } 
 
 
     if(isset($_POST['submit'])) {

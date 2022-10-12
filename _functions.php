@@ -164,7 +164,6 @@
                 }
             }
             if(!$delete) {
-                echo 'ADD TO THE ARRAY HERE!';
                 array_push($newData, $data[$i]);
             } 
         }
@@ -192,6 +191,18 @@
             $msg = $count . ' results found!';
         }
         return $msg;   
+    }
+
+    function makeRequest($url, $endPoint) {
+        $ch = curl_init();
+        //Connect to URL
+        curl_setopt($ch, CURLOPT_URL, $url . $endPoint);
+        //Receive response
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $binary_server_response = curl_exec($ch);
+        curl_close($ch);
+        $convertedServerResponse = "data:image/gif;base64," . base64_encode($binary_server_response);
+        return $convertedServerResponse;
     }
 
 
