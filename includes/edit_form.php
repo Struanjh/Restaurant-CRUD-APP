@@ -41,17 +41,17 @@
                     <label for="cuisine">Cuisine</label>
                     <select name="cuisine" id="cuisine">
                         <?php
-                            $cuisineArr = ["korean", "japanese", "thai", "vietnamese", "american"];
+                            // $cuisineArr = ["korean", "japanese", "thai", "vietnamese", "american"];
                             for ($i=0; $i<count($cuisineArr); $i++) {
-                                if((isset($_POST['edit'], $currSelecData[0]['cuisine']) && $currSelecData[0]['cuisine'] == $cuisineArr[$i])
+                                if((isset($_POST['edit'], $currSelecData[0]['cuisine']) && $currSelecData[0]['cuisine'] == $cuisineArr[$i]['name'])
                                    ||
-                                   (isset($_POST['submit'], $submittedData['cuisine']) && $submittedData['cuisine'] == $cuisineArr[$i]) && !$validationPassed) {
+                                   (isset($_POST['submit'], $submittedData['cuisine']) && $submittedData['cuisine'] == $cuisineArr[$i]['name']) && !$validationPassed) {
                                     $selected = 'selected';
                                 } else {
                                     $selected = '';
                                 }  
                         ?>
-                            <option value=<?=$cuisineArr[$i]?> <?=$selected?>> <?=$cuisineArr[$i]?> </option>
+                            <option value=<?=$cuisineArr[$i]['name']?> <?=$selected?>> <?=$cuisineArr[$i]['name']?> </option>
                         <?php 
                             } 
                         ?>    

@@ -20,10 +20,9 @@
                 <label for="cuisine">Cuisine</label>
                 <select name="cuisine" id="cuisine">
                     <?php
-                        $cuisineArr = ["korean", "japanese", "thai", "vietnamese", "american"];
                         for ($i=0; $i<count($cuisineArr); $i++) {
                     ?>
-                        <option value=<?=$cuisineArr[$i]?>> <?=$cuisineArr[$i]?> </option>
+                        <option value=<?=$cuisineArr[$i]['name']?>> <?=$cuisineArr[$i]['name']?> </option>
                     <?php 
                         } 
                     ?> 
@@ -69,9 +68,10 @@
         if(isset($_POST['submit']) && $dataFile && count($restaurants) > 0 ) {
             echo "<div class='resultsContainer'>";
             for($i=0; $i<count($searchResults); $i++) { 
+                $cuisine = filterData($cuisineArr, ['name' => $searchResults[$i]['cuisine']]);
         ?>
                 <div class="result">
-                    <img src=<?php echo makeRequest('https://countryflagsapi.com/png/', 'kr')?>>
+                    <img src=<?php echo makeRequest('https://countryflagsapi.com/png/', $cuisine[0]['endpoint'])?>>
                     <h4><?= $searchResults[$i]['name'] ?></h4>
                     <ul>
                         <li><?= $searchResults[$i]['city'] ?></li>

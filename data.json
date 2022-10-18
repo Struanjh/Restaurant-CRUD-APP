@@ -5,7 +5,7 @@
         "city": "abcd",
         "district": "bcde",
         "postcode": "defg",
-        "cuisine": "korean",
+        "cuisine": "German",
         "price": "high_price"
     },
     {
@@ -14,7 +14,7 @@
         "city": "das",
         "district": "adasd",
         "postcode": "dassda",
-        "cuisine": "american",
+        "cuisine": "Japanese",
         "price": "high_price"
     },
     {
@@ -23,7 +23,7 @@
         "city": "fds",
         "district": "abcd",
         "postcode": "sdf",
-        "cuisine": "korean",
+        "cuisine": "Chinese",
         "price": "medium_price"
     },
     {
@@ -32,7 +32,7 @@
         "city": "m;lm",
         "district": "m",
         "postcode": "ml;",
-        "cuisine": "korean",
+        "cuisine": "Thai",
         "price": "high_price"
     },
     {
@@ -41,7 +41,7 @@
         "city": "lkkl",
         "district": ";ll;",
         "postcode": "ll",
-        "cuisine": "american",
+        "cuisine": "Chinese",
         "price": "medium_price"
     }
 ]
