@@ -6,36 +6,40 @@
     //If data file exists already check for duplicate restaurant names during validation... otherwise don't
     if($dataFile) {
         $json_data = readData();
-        $restaurantNames = listRestaurantNames($json_data);
+        $restaurants = listRestaurants($json_data);
     } else {
         $successMsg = "No restaurants available to edit";
     }
-
-
+    
     if(isset($_POST['edit'])) {
-        if(!$dataFile || count($restaurantNames) === 0) {
+        if(!$dataFile || count($restaurants) === 0) {
             $successMsg = "There are no restaurants available to edit!";
         } else {
-            $currSelecData = filterData($json_data, ['name' => $_POST['restaurant_name']]);
+            $currNameID = splitValues($_POST["restaurant_name"],"|");
+            $currId = $currNameID[0];
+            $currName = $currNameID[1];
+            $currSelecData = filterData($json_data, ['id' => $currId]);
         }
     }
 
     if(isset($_POST['delete'])) {
-        if(!$dataFile || count($restaurantNames) === 0) {
+        if(!$dataFile || count($restaurants) === 0) {
             $successMsg = "There are no restaurants available to delete!";
         } else {
-            $updatedData = deleteAnEntry($json_data, $_POST['restaurant_name']);
+            $nameID = splitValues($_POST["restaurant_name"],"|");
+            $id = $nameID[0];
+            $updatedData = deleteAnEntry($json_data, $id);
             writeData($updatedData);
             //Re-read the data and re-list restaurant names to show updated dropdown list for the user....
             $json_data = readData();
-            $restaurantNames = listRestaurantNames($json_data);
+            $restaurants = listRestaurants($json_data);
             $successMsg = "Record Deleted Successfully!";
         }
     } 
 
 
     if(isset($_POST['submit'])) {
-        if(!$dataFile || count($restaurantNames) === 0) {
+        if(!$dataFile || count($restaurants) === 0) {
             $successMsg = "There are no restaurants available to edit!";
         } else {
             //Indexed Arr

@@ -1,6 +1,19 @@
 <?php
     //-----------------------------FUNCTION DEFINITIONS-------------------------------//
 
+    function dbg($msg, $data) {
+        if(gettype($data) === 'array' || gettype($data) === 'object') {
+            echo '<br>' . $msg . '<br>';
+            echo '<pre>';
+            print_r($data);
+            echo '</pre>';
+        }
+        else {
+            echo '<br>' . $msg . '<br>' . $data . '<br>'; 
+        }
+    }
+
+
     //Creates data.json if it doesn't already exist & returns boolean showing if file was created
     function create_file($file_path) {
         if (file_exists($file_path)) {
@@ -26,18 +39,31 @@
         $errorMessages = [];
         $submittedData = [];
         $validationPassed = true;
-        // $emptyFile = isset($GLOBALS['restaurantNames']);
+        if($operation === "SEARCH") {
+            foreach($_POST as $key => $val) {
+                if(isset($key) && $val!== "" && $key !== "submit") {
+                    $submittedData[$key] = cleanse_data($val);
+                }
+            }
+            dbg("FORM SUBMISSION PROCESSED DATA", $submittedData);
+            return [null, $submittedData, $validationPassed];
+        }
         if (empty($_POST["restaurant_name"]) && $operation !== "SEARCH") {
             $nameErr = "Name is required";
             $errorMessages["nameErr"] = $nameErr;
             $submittedData["name"] = "";
             $validationPassed = false;
-        } elseif (!$newFile && in_array($_POST["restaurant_name"], $GLOBALS['restaurantNames']) && $operation === "ADD") {
+        } elseif (!$newFile && in_array($_POST["restaurant_name"], $GLOBALS['restaurants']) && $operation === "ADD") {
             $nameErr = "This name already exists!";
             $errorMessages["nameErr"] = $nameErr;
             $submittedData["name"] = "";
             $validationPassed = false;
-        } else {
+        } elseif ($operation === "EDIT") {
+            $errorMessages["nameErr"] = "";
+            $nameID = splitValues($_POST["restaurant_name"], "|");
+            $submittedData["id"] = cleanse_data($nameID[0]);
+            $submittedData["name"] = cleanse_data($nameID[1]);
+         } else {
             $errorMessages["nameErr"] = "";
             $submittedData["name"] = cleanse_data($_POST["restaurant_name"]);
         }
@@ -77,7 +103,7 @@
             $errorMessages["cuisineErr"] = "";
             $submittedData["cuisine"] = cleanse_data($_POST["cuisine"]);
         }
-        if (!isset($_POST["price"])) {
+        if (!isset($_POST["price"]) && $operation !== "SEARCH") {
             $priceErr = "Price is required";
             $errorMessages["priceErr"] = $priceErr;
             $submittedData["price"] = "";
@@ -85,14 +111,6 @@
         } else {
             $errorMessages["priceErr"] = "";
             $submittedData["price"] = cleanse_data($_POST["price"]);
-        }
-        if($operation === "SEARCH") {
-            //The user may not have completed all fields so remove empty array keys to prevent errors
-            foreach($submittedData as $key => $val) {
-                if (empty($submittedData[$key])) {
-                    unset($submittedData[$key]);
-                }
-            }
         }
         return [$errorMessages, $submittedData, $validationPassed];
     }
@@ -116,17 +134,20 @@
         file_put_contents(FILEPATH , $data);
     }
 
-    function listRestaurantNames($data) {
-        $restaurantNames = [];
+    //Function loops through data file and
+    //returns a nested array of restaurants only ID and Restaurant Names to populate the dropdown list
+    function listRestaurants($data) {
+        $restaurants = [];
         for($i=0; $i<count($data); $i++) {
+            $restaurant = [];
             foreach ($data[$i] as $key => $value) {
-                if ($key == "name") {
-                    array_push($restaurantNames, $value);
-                    break;
+                if ($key == "id" || $key == "name") {
+                    $restaurant[$key] = $value;
                 }
             }
+            array_push($restaurants, $restaurant);
         }
-        return $restaurantNames;
+        return $restaurants;
     }
 
 
@@ -134,19 +155,18 @@
     //It returns an object containing matching results..
     function filterData($objToFilter, $criteria) {
         $results = [];
-        for ($i = 0; $i < count($objToFilter); $i++) {
+        //Loop the database - each place object.....
+        foreach($objToFilter as $entry) {
+            dbg("ENTRY", $entry);
             $matchFound = true;
-            foreach($criteria as $key => $value) {
-                if(isset($objToFilter[$i][$key]) && $objToFilter[$i][$key] == $value) {
-                    continue;
-                } else {
+            foreach($criteria as $key => $val) {
+                if($entry[$key] !== $val) {
+                    //There's no match, move on to the next object.....
                     $matchFound = false;
                     break;
                 }
-            } 
-            if($matchFound) {
-                array_push($results, $objToFilter[$i]);
             }
+            if($matchFound) array_push($results, $entry);
         }
         return $results;
     }
@@ -158,7 +178,7 @@
         for($i=0; $i<count($data); $i++) {
             $delete = false;
             foreach($data[$i] as $key => $val) {
-                if($key === 'name' && $val === $entryToDelete) {
+                if($key === 'id' && $val === $entryToDelete) {
                     $delete = true;
                     break;
                 }
@@ -203,6 +223,11 @@
         curl_close($ch);
         $convertedServerResponse = "data:image/gif;base64," . base64_encode($binary_server_response);
         return $convertedServerResponse;
+    }
+
+    function splitValues($value, $delimiter) {
+        $value = explode($delimiter, $value);
+        return $value;
     }
 
 

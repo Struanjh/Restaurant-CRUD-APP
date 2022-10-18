@@ -23,6 +23,7 @@
                 <label for="cuisine">Cuisine</label>
                 <select name="cuisine" id="cuisine">
                     <?php
+                        //Put this in const file and make it an object to link the country name with the flag code......
                         $cuisineArr = ["korean", "japanese", "thai", "vietnamese", "american"];
                         for ($i=0; $i<count($cuisineArr); $i++) {
                             if(isset($_POST['submit']) && !$validationPassed && $submittedData['cuisine'] == $cuisineArr[$i]) {

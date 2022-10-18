@@ -13,8 +13,8 @@
     <form method="post">
         <div class="form-section">
             <div class="form-sub-section">
-                <label for="restaurant_name">Restaurant Name</label>
-                <input type="text" name="restaurant_name" id="restaurant_name" value="<?php if($_SERVER["REQUEST_METHOD"] == "POST" && isset($submittedData['name'])) echo $submittedData['name']; ?>">
+                <label for="name">Restaurant Name</label>
+                <input type="text" name="name" id="name">
             </div>
             <div class="form-sub-section">
                 <label for="cuisine">Cuisine</label>
@@ -22,13 +22,8 @@
                     <?php
                         $cuisineArr = ["korean", "japanese", "thai", "vietnamese", "american"];
                         for ($i=0; $i<count($cuisineArr); $i++) {
-                            if(isset($_POST['submit']) && $submittedData['cuisine'] == $cuisineArr[$i]) {
-                                $selected = 'selected';
-                            } else {
-                                $selected = '';
-                            }
                     ?>
-                        <option value=<?=$cuisineArr[$i]?> <?=$selected?>> <?=$cuisineArr[$i]?> </option>
+                        <option value=<?=$cuisineArr[$i]?>> <?=$cuisineArr[$i]?> </option>
                     <?php 
                         } 
                     ?> 
@@ -71,7 +66,7 @@
     </form>
     <h4 id="success_message"><?php if(isset($_POST['submit'])) echo $outcomeMsg; ?></h4>
         <?php
-        if(isset($_POST['submit']) && $dataFile && count($restaurantNames) > 0 ) {
+        if(isset($_POST['submit']) && $dataFile && count($restaurants) > 0 ) {
             echo "<div class='resultsContainer'>";
             for($i=0; $i<count($searchResults); $i++) { 
         ?>
