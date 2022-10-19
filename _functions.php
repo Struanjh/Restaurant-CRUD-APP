@@ -45,7 +45,6 @@
                     $submittedData[$key] = cleanse_data($val);
                 }
             }
-            dbg("FORM SUBMISSION PROCESSED DATA", $submittedData);
             return [null, $submittedData, $validationPassed];
         }
         if (empty($_POST["restaurant_name"]) && $operation !== "SEARCH") {
@@ -155,9 +154,8 @@
     //It returns an object containing matching results..
     function filterData($objToFilter, $criteria) {
         $results = [];
-        //Loop the database - each place object.....
+        //Loop the data file - each place object.....
         foreach($objToFilter as $entry) {
-            dbg("ENTRY", $entry);
             $matchFound = true;
             foreach($criteria as $key => $val) {
                 if($entry[$key] !== $val) {
@@ -170,6 +168,7 @@
         }
         return $results;
     }
+
 
     //Take the PHP data object and a restaurant name represneting an entry to be deleted.
     //Returns the PHP Object with the target entry deleted...

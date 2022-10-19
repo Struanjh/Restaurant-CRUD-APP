@@ -18,7 +18,13 @@
                     <label for="restaurant_name">Select a restaurant to edit</label>
                     <select name="restaurant_name" id="restaurant_name">
                             <?php                            
-                                for ($i=0; $i<count($restaurants); $i++) {
+                                for ($i=-1; $i<count($restaurants); $i++) {
+                                    if($i === -1) {
+                            ?>
+                                        <option disabled selected> -- select an option -- </option>
+                            <?php
+                                        continue;
+                                    }
                                     if((isset($_POST['edit']) && $restaurants[$i]['id'] ===  $currSelecData[0]['id']) 
                                         ||
                                        (isset($_POST['submit']) && $restaurants[$i]['id'] === $submittedData['id']) && !$validationPassed) {
@@ -41,20 +47,27 @@
                     <label for="cuisine">Cuisine</label>
                     <select name="cuisine" id="cuisine">
                         <?php
-                            // $cuisineArr = ["korean", "japanese", "thai", "vietnamese", "american"];
-                            for ($i=0; $i<count($cuisineArr); $i++) {
+                            for ($i=-1; $i<count($cuisineArr); $i++) {
                                 if((isset($_POST['edit'], $currSelecData[0]['cuisine']) && $currSelecData[0]['cuisine'] == $cuisineArr[$i]['name'])
-                                   ||
-                                   (isset($_POST['submit'], $submittedData['cuisine']) && $submittedData['cuisine'] == $cuisineArr[$i]['name']) && !$validationPassed) {
-                                    $selected = 'selected';
+                                ||
+                                (isset($_POST['submit'], $submittedData['cuisine']) && $submittedData['cuisine'] == $cuisineArr[$i]['name']) && !$validationPassed) {
+                                 $selected = 'selected';
                                 } else {
-                                    $selected = '';
-                                }  
+                                 $selected = '';
+                                } 
+                                if($i === -1) {
                         ?>
-                            <option value=<?=$cuisineArr[$i]['name']?> <?=$selected?>> <?=$cuisineArr[$i]['name']?> </option>
+                                <option disabled selected> -- select an option -- </option>
+                        <?php   
+                                } else {  
+                        ?>
+                                 <option value=<?=$cuisineArr[$i]['name']?> <?=$selected?>> <?=$cuisineArr[$i]['name']?> </option>
+                        <?php 
+                                }
+                        ?>       
                         <?php 
                             } 
-                        ?>    
+                        ?>  
                     </select>
                     <span class="error"><?php if(isset($_POST['submit']) && count($restaurants) > 0) echo $formValidation['cuisineErr']; ?></span>
                 </div>

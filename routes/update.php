@@ -10,10 +10,12 @@
     } else {
         $successMsg = "No restaurants available to edit";
     }
-    
+
     if(isset($_POST['edit'])) {
         if(!$dataFile || count($restaurants) === 0) {
             $successMsg = "There are no restaurants available to edit!";
+        } elseif(!isset($_POST['restaurant_name'])) {
+            $successMsg = "Select a restaurant to edit!";
         } else {
             $currNameID = splitValues($_POST["restaurant_name"],"|");
             $currId = $currNameID[0];

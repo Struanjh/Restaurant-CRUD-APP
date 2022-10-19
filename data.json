@@ -20,11 +20,11 @@
     {
         "id": "634d3b8557f81",
         "name": "dsf",
-        "city": "fds",
-        "district": "abcd",
-        "postcode": "sdf",
-        "cuisine": "Chinese",
-        "price": "medium_price"
+        "city": "xx",
+        "district": "xx",
+        "postcode": "xx",
+        "cuisine": "Vietnamese",
+        "price": "high_price"
     },
     {
         "id": "634d3dea355ff",
@@ -43,5 +43,23 @@
         "postcode": "ll",
         "cuisine": "Chinese",
         "price": "medium_price"
+    },
+    {
+        "id": "634fd222ad797",
+        "name": "NEW ENTRY",
+        "city": "fds",
+        "district": "dsf",
+        "postcode": "1234",
+        "cuisine": "German",
+        "price": "high_price"
+    },
+    {
+        "id": "634fd4a877f6f",
+        "name": "sddfds",
+        "city": "sdfdfs",
+        "district": "dfsds",
+        "postcode": "dsfdsf",
+        "cuisine": "Korean",
+        "price": "low_price"
     }
 ]

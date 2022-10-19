@@ -19,13 +19,21 @@
             <div class="form-sub-section">
                 <label for="cuisine">Cuisine</label>
                 <select name="cuisine" id="cuisine">
-                    <?php
-                        for ($i=0; $i<count($cuisineArr); $i++) {
-                    ?>
-                        <option value=<?=$cuisineArr[$i]['name']?>> <?=$cuisineArr[$i]['name']?> </option>
-                    <?php 
-                        } 
-                    ?> 
+                <?php
+                    for ($i=-1; $i<count($cuisineArr); $i++) {
+                        if($i === -1) {
+                ?>
+                            <option disabled selected> -- select an option -- </option>
+                <?php   
+                        } else {  
+                ?>
+                            <option value=<?=$cuisineArr[$i]['name']?>> <?=$cuisineArr[$i]['name']?> </option>
+                <?php 
+                        }
+                ?>       
+                <?php 
+                    } 
+                ?>  
                 </select>
             </div>
             <div class="form-sub-section">

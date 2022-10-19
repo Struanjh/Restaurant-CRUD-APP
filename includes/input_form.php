@@ -8,10 +8,7 @@
     <title>Add</title>
 </head>
 <body>
-    <?php 
-        if(isset($_POST["submit"])) include "../routes/create.php"; 
-    ?>
-
+    <?php include "../routes/create.php"; ?>
     <form method="post">
         <div class="form-section">
             <div class="form-sub-section">
@@ -23,16 +20,22 @@
                 <label for="cuisine">Cuisine</label>
                 <select name="cuisine" id="cuisine">
                     <?php
-                        //Put this in const file and make it an object to link the country name with the flag code......
-                        $cuisineArr = ["korean", "japanese", "thai", "vietnamese", "american"];
-                        for ($i=0; $i<count($cuisineArr); $i++) {
-                            if(isset($_POST['submit']) && !$validationPassed && $submittedData['cuisine'] == $cuisineArr[$i]) {
+                        for ($i=-1; $i<count($cuisineArr); $i++) {
+                            if(isset($_POST['submit']) && !$validationPassed && $submittedData['cuisine'] == $cuisineArr[$i]['name']) {
                                 $selected = 'selected';
                             } else {
                                 $selected = '';
                             }
+                            if($i === -1) {
                     ?>
-                        <option value=<?=$cuisineArr[$i]?> <?=$selected?>> <?=$cuisineArr[$i]?> </option>
+                                <option disabled selected> -- select an option -- </option>
+                    <?php   
+                            } else {  
+                    ?>
+                                <option value=<?=$cuisineArr[$i]['name']?> <?=$selected?>> <?=$cuisineArr[$i]['name']?> </option>
+                   <?php 
+                            }
+                   ?>       
                     <?php 
                         } 
                     ?> 
