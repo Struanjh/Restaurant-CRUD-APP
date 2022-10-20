@@ -1,0 +1,4 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_URI} !pages/
+RewriteRule ([^\/]*\.php) pages/$1 [L]
