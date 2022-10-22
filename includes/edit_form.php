@@ -17,7 +17,7 @@
                                     }
                                     if((isset($_POST['edit']) && $restaurants[$i]['id'] ===  $currSelecData[0]['id']) 
                                         ||
-                                       (isset($_POST['submit']) && $restaurants[$i]['id'] === $submittedData['id']) && !$validationPassed) {
+                                       (isset($_POST['submit'], $submittedData['id']) && $restaurants[$i]['id'] === $submittedData['id']) && !$validationPassed) {
                                         $selected = 'selected';
                                     } else {
                                         $selected = '';
@@ -26,6 +26,7 @@
                                 }         
                             ?>
                     </select>
+                    <span class="error"><?php if(isset($_POST['submit']) && count($restaurants) > 0) echo $formValidation['nameErr']; ?></span>
                 </div>
                 <div class="form-sub-section">
                     <button type="submit" name="edit" value="edit">Edit Entry</button>

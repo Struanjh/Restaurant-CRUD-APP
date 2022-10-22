@@ -4,16 +4,35 @@
 
     $dataFile = file_exists(FILEPATH);
     //If data file exists already check for duplicate restaurant names during validation... otherwise don't
+    // if($dataFile) {
+    //     $json_data = readData();
+    //     $restaurants = listRestaurants($json_data);
+    // } else {
+    //     $successMsg = "No restaurants available to edit";
+    // }
+
+    //Check if data file actuallt exists and read the data if it does..
     if($dataFile) {
         $json_data = readData();
-        $restaurants = listRestaurants($json_data);
     } else {
         $successMsg = "No restaurants available to edit";
     }
 
+    //Check if the data file is empty
+    if(!isset($json_data)) {
+        $restaurants = [];
+        $successMsg = "No restaurants available to edit";
+    } else {
+        //The file contains data.. get the restaurant names and id's
+        $restaurants = listRestaurants($json_data);
+    }
+
+
+    // if(!$dataFile || count($restaurants) === 0) $successMsg = "No restaurants available to edit";
+
     if(isset($_POST['edit'])) {
         if(!$dataFile || count($restaurants) === 0) {
-            $successMsg = "There are no restaurants available to edit!";
+            $successMsg = "No restaurants available to edit!";
         } elseif(!isset($_POST['restaurant_name'])) {
             $successMsg = "Select a restaurant to edit!";
         } else {
@@ -26,8 +45,11 @@
 
     if(isset($_POST['delete'])) {
         if(!$dataFile || count($restaurants) === 0) {
-            $successMsg = "There are no restaurants available to delete!";
-        } else {
+            $successMsg = "No restaurants available to delete!";
+        } elseif(!isset($_POST["restaurant_name"])) {
+            $successMsg = "Select A Restaurant To Delete!";
+        }
+        else {
             $nameID = splitValues($_POST["restaurant_name"],"|");
             $id = $nameID[0];
             $updatedData = deleteAnEntry($json_data, $id);
@@ -42,7 +64,7 @@
 
     if(isset($_POST['submit'])) {
         if(!$dataFile || count($restaurants) === 0) {
-            $successMsg = "There are no restaurants available to edit!";
+            $successMsg = "No restaurants available to edit!";
         } else {
             //Indexed Arr
             $formSubmission = handleFormSubmission("EDIT", false);

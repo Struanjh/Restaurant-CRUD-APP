@@ -13,5 +13,7 @@
  include "../includes/navbar.php";
  include "../includes/input_form.php";
 ?> 
+<i class="fa-solid fa-earth-asia"></i>
+<i class="fa-solid fa-earth-asia"></i>
 </body>
 </html>

@@ -11,8 +11,8 @@
             if($json_data !== null) {
                 $restaurants = listRestaurants($json_data);
             } else {
-                $restaurants = null;
-            }// echo gettype($json_data);// echo '<br>' . '<br>';
+                $restaurants = [];
+            }
             $formSubmission = handleFormSubmission("ADD", false);
         } else {
             $formSubmission = handleFormSubmission("ADD", true);
@@ -38,7 +38,6 @@
         writeData($newData);
         $successMsg = "Record Added Successfully!";
         } else {
-            dbg("VALIDATION RESULTS", $validationPassed);
             $successMsg = "Fix the errors and try again!";
         }
     }

@@ -1,0 +1,47 @@
+[
+    {
+        "id": "634cf09052b13",
+        "name": ";k;lk",
+        "city": "abcd",
+        "district": "bcde",
+        "postcode": "defg",
+        "cuisine": "German",
+        "price": "high_price"
+    },
+    {
+        "id": "634d3b8557f81",
+        "name": "dsf",
+        "city": "xx",
+        "district": "xx",
+        "postcode": "xx",
+        "cuisine": "Vietnamese",
+        "price": "high_price"
+    },
+    {
+        "id": "634d3dea355ff",
+        "name": ";l&#039;",
+        "city": "m;lm",
+        "district": "m",
+        "postcode": "ml;",
+        "cuisine": "Thai",
+        "price": "high_price"
+    },
+    {
+        "id": "634d3e00c0164",
+        "name": "hi hi",
+        "city": "lkkl",
+        "district": ";ll;",
+        "postcode": "ll",
+        "cuisine": "Chinese",
+        "price": "medium_price"
+    },
+    {
+        "id": "634fd4a877f6f",
+        "name": "sddfds",
+        "city": "sdfdfs",
+        "district": "dfsds",
+        "postcode": "dsfdsf",
+        "cuisine": "Korean",
+        "price": "low_price"
+    }
+]
